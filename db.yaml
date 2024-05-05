@@ -4,7 +4,7 @@
   vars:
     DB_IP: 172.31.25.29
   vars_prompt:
-    name: PASSWORD
+  - name: PASSWORD
     prompt: Please enter root user password
     private: false
   tasks:
