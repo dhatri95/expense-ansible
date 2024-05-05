@@ -50,8 +50,11 @@
 
   - name: install PyMySQL
     ansible.builtin.pip:
-      name: PyMySQL
+      name: "{{item}}"
       state: present
+    loop:
+    - cryptography
+    - PyMySQL
   
   - name: Create DB and table
     community.mysql.mysql_db:
