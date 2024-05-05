@@ -1,6 +1,12 @@
 - name: Expense app DB server setup
   hosts: db
   become: yes
+  vars:
+    DB_IP: 172.31.25.29
+  vars_prompt:
+    name: PASSWORD
+    prompt: Please enter root user password
+    private: false
   tasks:
   - name: install mysql server
     ansible.builtin.dnf:
@@ -15,8 +21,6 @@
       - cryptography
       - PyMySQL
 
-    
-
   - name: state and enable mysqld service
     ansible.builtin.service:
       name: mysqld
@@ -26,8 +30,8 @@
   - name: DB connection check
     community.mysql.mysql_info:
       login_user: root
-      login_password: "ExpenseApp@1"
-      login_host: "172.31.25.29"
+      login_password: "{{ PASSWORD }}"
+      login_host: "{{ DB_IP }}"
       filter: version
     ignore_errors: yes
     register: mysql_output
@@ -42,6 +46,6 @@
     when:
       mysql_output.connector_version==0
 
-  - name: check output of setting password
-    ansible.builtin.debug:
-      msg: "Output is {{output}}"
+  # - name: check output of setting password
+  #   ansible.builtin.debug:
+  #     msg: "Output is {{output}}"
