@@ -1,6 +1,12 @@
 - name: Setting up backend server
   hosts: backend
   become: yes
+  vars_prompt:
+  - name: SQL_PASSWORD
+    prompt: Please enter sql password
+    private: false
+  vars:
+  - DB_IP: 172.31.26.104
   tasks:
   - name: disable default nodejs version
     ansible.builtin.command: dnf module disable nodejs -y
@@ -61,7 +67,11 @@
       state: import
       name: all
       login_user: root
-      login_password: ExpenseApp@1
-      login_host: "172.31.26.104"
+      login_password: "{{SQL_PASSWORD}}"
+      login_host: "{{DB_IP}}"
       target: /app/schema/backend.sql
-  
+
+  - name: Restart backend service
+    ansible.builtin.systemd_service:
+      state: restarted
+      name: backend 
