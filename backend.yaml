@@ -30,5 +30,8 @@
       src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
       dest: /app/backend
       remote_src: yes
-  
 
+  - name: Install packages based on package.json
+    community.general.npm:
+      path: /app/
+      state: installed
