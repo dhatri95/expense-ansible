@@ -2,7 +2,7 @@
   hosts: db
   become: yes
   vars:
-    DB_IP: 172.31.25.29
+    DB_IP: 172.31.26.62
   vars_prompt:
   - name: PASSWORD
     prompt: Please enter root user password
