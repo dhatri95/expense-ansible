@@ -6,8 +6,13 @@
     ansible.builtin.dnf:
       name: mysql-server
       state: present
-  
-  - name: state and enable mysql service
+
+  - name: install PYMYSQL
+    ansible.builtin.pip:
+     name: PyMySQL
+     state: latest
+
+  - name: state and enable mysqld service
     ansible.builtin.service:
       name: mysqld
       state: restarted
