@@ -7,7 +7,7 @@
       name: mysql-server
       state: present
 
-  - name: install PYMYSQL
+  - name: install Python dependencies
     ansible.builtin.pip:
       name: "{{ item }}"
       state: latest
@@ -31,6 +31,10 @@
       filter: version
     ignore_errors: yes
     register: mysql_output
+
+  - name: print Db connection output
+    ansible.builtin.debug:
+      msg: "MYSQL Output is {{mysql_output}}"
 
   - name: set root password
     ansible.builtin.command: mysql_secure_installation --set-root-pass ExpenseApp@1
