@@ -80,3 +80,4 @@
     ansible.builtin.systemd_service:
       state: restarted
       name: backend 
+      enabled: yes
