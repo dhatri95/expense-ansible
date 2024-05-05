@@ -41,10 +41,10 @@
       msg: "MYSQL Output is {{mysql_output}}"
 
   - name: set root password
-    ansible.builtin.command: mysql_secure_installation --set-root-pass ExpenseApp@1
+    ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ PASSWORD }}"
     register: output
     when:
-      mysql_output.connector_version==0
+      mysql_output.failed is true
 
   # - name: check output of setting password
   #   ansible.builtin.debug:
