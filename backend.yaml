@@ -23,13 +23,13 @@
 
   - name: create app directory
     ansible.builtin.file:
-      path: /app/backend
+      path: /app
       state: directory
 
   - name: Unarchive app code that needs to be downloaded
     ansible.builtin.unarchive:
       src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-      dest: /app/backend
+      dest: /app/
       remote_src: yes
 
   - name: Install packages based on package.json
