@@ -22,7 +22,7 @@
 
   - name: create app directory
     ansible.builtin.file:
-      path: /app
+      path: /app/backend
       state: directory
 
   - name: Unarchive app code that needs to be downloaded
@@ -31,4 +31,4 @@
       dest: /app/backend
       remote_src: yes
   
-  
+
