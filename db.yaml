@@ -9,8 +9,13 @@
 
   - name: install PYMYSQL
     ansible.builtin.pip:
-     name: PyMySQL
-     state: latest
+      name: {{item}}
+      state: latest
+    loop:
+    - cryptography
+    - PyMySQL
+
+    
 
   - name: state and enable mysqld service
     ansible.builtin.service:
