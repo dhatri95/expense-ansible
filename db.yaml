@@ -9,11 +9,11 @@
 
   - name: install PYMYSQL
     ansible.builtin.pip:
-      name: {{item}}
+      name: {{ item }}
       state: latest
     loop:
-    - cryptography
-    - PyMySQL
+      - cryptography
+      - PyMySQL
 
     
 
